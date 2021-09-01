@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.js"></script>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="d-flex flex-column width-full">
+
+        <h2>Meus pedidos</h2>
+
+        <!-- Pedidos -->
+        <div class="container card row col-12 p-3 mb-3 no-m-sides">
+
+            <!-- Pedido por id -->
+            <div class="accordion" id="accordionPedidos">
+                <div class="card" th:each="pedido : ${compras}">
+                    <div class="card-header" th:id="${'header' + pedido.id}">
+                        <h2 class="mb-0">
+                            <button class="btn btn-block text-left" type="button" data-toggle="collapse"
+                                    th:data-target="${'#collapse' + pedido.id}" aria-expanded="true"
+                                    th:aria-controls="${'#collapse' + pedido.id}"
+                                    th:text="${'Pedido #' + pedido.id + ' Data: ' + pedido.data}">
+                            </button>
+                        </h2>
+                    </div>
+
+                    <!-- Produtos -->
+                    <div th:id="${'collapse' + pedido.id}" class="collapse"
+                         th:aria-labelledby="${'header' + pedido.id}"
+                         data-parent="#accordionPedidos">
+                        <div class="card-body">
+                            <h5 th:text="${'Pedido #' + pedido.id + ' Data: ' + pedido.data}"></h5>
+                            <p><b>Frete:</b> <span th:text="${pedido.frete.id + ' - ' + pedido.frete.texto}"></span></p>
+                            <div class="col-12 no-m-sides">
+                                <b>Produtos: </b>
+                                <ul>
+                                    <li th:each="itemPed : ${pedido.compraProdutos}"
+                                        class="row border-bottom m-3">
+                                        <span class="col-4" th:text="${itemPed.id.produto.titulo}"></span>
+                                        <span class="col-4" th:text="${'R$' + itemPed.valor}"></span>
+                                        <span class="col-4" th:text="${itemPed.quantidade + 'x'}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12 no-m-sides text-align-end">
+                                <b th:text="${'Total: R$' + pedido.getValorTotal()}"></b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

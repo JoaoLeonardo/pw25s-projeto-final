@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+    <script type="text/javascript" th:src="@{/js/trocar-senha.js}"></script>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <form class="width-full" th:action="@{/login/trocar-senha}" method="post"
+          th:object="${trocaSenha}">
+        <div class="container card d-flex column justify-content-between col-12 p-3 no-m-sides">
+
+            <!-- Título -->
+            <div class="mb-3">
+                <h4 class="font-weight-bold mb-3">Atualizar senha</h4>
+                <div class="mb-3"></div>
+                <div class="hor-divider-dark"></div>
+            </div>
+
+            <div class="d-flex flex-column align-items-center">
+
+                <!-- Senha -->
+                <div class="col-lg-6 col-sm-12 form-group required">
+                    <label class="control-label" th:for="senha" th:text="'Senha'"></label>
+                    <input class="form-control" th:field="*{senha}" type="password" required="required">
+                    <span th:errors="*{senha}" class="text-danger"></span>
+                </div>
+
+                <!-- Confirmar senha -->
+                <div class="col-lg-6 col-sm-12 form-group required">
+                    <label class="control-label" th:for="confirmacaoSenha">Confirme a senha</label>
+                    <input type="password" class="form-control" th:field="*{confirmacaoSenha}" required="required">
+                    <span th:errors="*{confirmacaoSenha}" class="text-danger"></span>
+                </div>
+
+                <!-- Token (hidden) -->
+                <input type="hidden" th:field="*{token}" required="required">
+
+                <!-- Btn confirmar -->
+                <div class="col-lg-6 col-sm-12 mb-2">
+                    <button class="btn btn-success" type="submit" style="width: 100%">Confirmar</button>
+                </div>
+
+                <!-- Alertas -->
+                <div th:if="${msgSucesso}" th:text="${msgSucesso}" class="text-success"></div>
+                <div th:if="${msgErro}" th:text="${msgErro}" class="text-danger"></div>
+
+            </div>
+
+            <!-- Logo -->
+            <div class="row p-2 no-m-sides justify-content-end">
+                <div th:replace="layout/fragments/logo"></div>
+            </div>
+
+        </div>
+
+    </form>
+</section>
+</body>
+</html>

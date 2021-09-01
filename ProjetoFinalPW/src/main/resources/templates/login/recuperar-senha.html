@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+    <script type="text/javascript" th:src="@{/js/senha-recuperacao.js}"></script>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container card d-flex column justify-content-between col-12 p-3 no-m-sides" style="max-height: 300px;">
+
+        <!-- Título -->
+        <div class="mb-3">
+            <h4 class="font-weight-bold mb-3">Esqueci minha senha...</h4>
+            <div class="mb-3"></div>
+            <div class="hor-divider-dark"></div>
+        </div>
+
+        <form class="d-flex flex-column align-items-center" id="formSenhaReset">
+
+            <!-- Login -->
+            <div class="col-lg-6 col-sm-12 form-group required">
+                <label class="control-label" for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email"
+                       placeholder="Insira a indentificação..." required="true">
+            </div>
+
+            <!-- Btn confirmar -->
+            <div class="col-lg-6 col-sm-12 mb-2">
+                <button type="submit" class="btn btn-success" style="width: 100%">Confirmar</button>
+            </div>
+
+        </form>
+
+        <!-- Logo -->
+        <div class="row p-2 no-m-sides justify-content-end">
+            <div th:replace="layout/fragments/logo"></div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+    <script type="text/javascript" th:src="@{/js/produto-form.js}"></script>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="flex-column flex-grow-1">
+
+        <!-- Filtro global -->
+        <div class="flex flex-grow-1 mb-3">
+            <div th:replace="layout/fragments/filtro-global"></div>
+        </div>
+
+        <div class="row no-m-sides">
+
+            <!-- Card produto -->
+            <div class="card container col-lg-9 col-sm-12 p-3">
+
+                <!-- Imagens -->
+                <div class="d-flex justify-content-center p-3 row-wrap border-bottom"
+                     th:if="${produto.produtoDetalhe}">
+
+                    <!-- Lista de imagens -->
+                    <div th:id="dvImgListaContainer" class="d-flex flex-column p-3 m-2 produto-img-miniature-group">
+                        <img th:each="imagem: ${produto.produtoDetalhe.imagens}"
+                             class="img-thumbnail produto-img-miniature clickable"
+                             th:src="@{${'/images/' + imagem.nome}}"
+                             th:onclick="trocarImagemPrincipalExibida([[${'/images/' + imagem.nome}]]);">
+                    </div>
+
+                    <!-- Imagem em exibição -->
+                    <img th:id="dvImgPrincipal" class="produto-pg-img align-self-center clickable"
+                         onclick="abrirImagemPrincipalEmNovaGuia()">
+
+                </div>
+
+                <!-- Divider -->
+                <div class="hor-divider-dark"></div>
+
+                <!-- Texto (resumo) -->
+                <div class="justify-text p-3 flex-column">
+                    <div><b>Título:</b> <span th:text="${produto.titulo}"></span></div>
+                    <div class="row no-m">
+                        <b class="word-margin">Diretor:</b>
+                        <div class="word-margin" th:each="diretor,iter: ${produto.diretores}">
+                            <div th:text="${diretor.nome} + (${iter.last} ? '' : ', ')"></div>
+                        </div>
+                    </div>
+                    <div><b>Ano:</b> <span th:text="${produto.ano}"></span></div>
+                    <div><b>Sinopse:</b> <span th:text="${produto.sinopse}"></span></div>
+                </div>
+
+                <!-- Texto (expandido) -->
+                <div th:if="${produto.produtoDetalhe}"
+                     class="d-flex justify-text p-3 flex-column bg-color-distinct-group">
+                    <span><i><b>Mais detalhes</b></i></span>
+                    <div>
+                        <i>Avaliação:</i>
+                        <b th:class="${produto.produtoDetalhe.nota} >= 3 ? 'text-success' : 'text-error'"
+                           th:text="${produto.produtoDetalhe.nota} + '/5'"></b>
+                    </div>
+                    <div class="row no-m">
+                        <i class="word-margin">Fornecido por:</i>
+                        <div th:text="${produto.produtoDetalhe.fornecedor.nome}"></div>
+                    </div>
+                    <div><i>Entregue por:</i> Trabalho Final - João Leonardo</div>
+                    <div>
+                        <i>Informações adicionais:</i>
+                        <a th:href="${produto.produtoDetalhe.infoAdicionalLink}"
+                           th:text="${produto.produtoDetalhe.infoAdicionalLink}"></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Card ações -->
+            <div class="card container col-lg-3 col-sm-12 p-3">
+                <form class="d-flex flex-column height-full no-m-sides"
+                      method="post">
+
+                    <!-- Capa -->
+                    <div class="p-3 d-flex col-12 justify-content-center height-half">
+                        <img class="produto-img align-self-center" th:src="@{${'/images/' + produto.imagem}}">
+                    </div>
+
+                    <!-- Botão comprar -->
+                    <div class="p-3  mb-3 d-flex justify-content-center height-full width-full align-items-center bg-color-distinct-group">
+                        <div th:replace="produto/fragments/botao-compra"></div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

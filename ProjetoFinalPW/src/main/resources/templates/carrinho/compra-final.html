@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<body>
+<head>
+    <script type="text/javascript" th:src="@{/js/compra-finalizacao.js}"></script>
+</head>
+<section layout:fragment="conteudo">
+    <div class="d-flex flex-column width-full">
+
+        <h2>Confirmação da compra</h2>
+
+        <!-- Compra -->
+        <div class="width-full row no-m-sides">
+
+            <!-- Produtos -->
+            <div th:replace="carrinho/fragments/compra-produtos.html"></div>
+
+            <!-- Ações da compra -->
+            <div class="container card-compra-confirmacao-acoes card row col-lg-4 col-sm-12 p-3 no-m-sides">
+
+                <!-- Frete -->
+                <div class="col border-bottom border-dark d-flex flex-column justify-content-center">
+                    <input type="hidden" id="freteId" th:value="${frete.id}">
+                    <label class="form-check-label d-flex justify-content-between">
+                        <i class="mr-1" th:text="${frete.texto}"></i>
+                        <i class="mr-1" th:text="${frete.prazo}"></i>
+                        <i class="mr-1"
+                           th:text="'R$' + (${frete.valorEntrega} ? ${frete.valorEntrega} : '0,00')"></i>
+                    </label>
+                </div>
+
+                <!-- Valor total -->
+                <div class="col d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                    <h5 class="no-m">Valor final (1x)</h5>
+                    <div class="d-flex flex-column text-align-end">
+                        <b th:text="'R$' + ${valorFinal}"></b>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+                <form th:id="frm" class="col d-flex flex-column p-3 justify-content-center bg-color-distinct-group mb-3"
+                      th:action="@{/compra}" method="post">
+                    <button class="btn btn-dark box-shadow mb-2" type="submit">
+                        Finalizar compra
+                    </button>
+                    <a class="mb-2 text-align-center" th:href="@{/home}">Escolher mais produtos</a>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

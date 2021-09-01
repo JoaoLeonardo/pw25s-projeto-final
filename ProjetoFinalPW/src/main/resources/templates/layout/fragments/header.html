@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{/js/carrinho-compra.js}"></script>
+</head>
+<header class="container-fluid position-sticky bg-color-primary row d-flex justify-content-center box-shadow-bottom">
+
+    <!-- Título -->
+    <div class="col p-2">
+        <a class="page-title-container row no-text-decor hoverable-container" th:href="@{/home}">
+            <div class="mr-3 row no-m-sides">
+                <div class="divider-light m-1"></div>
+                <i class="icon-container d-flex m-1">
+                    <div th:replace="/layout/fragments/logo-box"></div>
+                </i>
+                <div class="divider-light m-1"></div>
+            </div>
+            <h1 class="hoverable-text">A Real .COMpany</h1>
+        </a>
+    </div>
+
+    <!-- Menu produtos -->
+    <div class="col-xl-4 col-sm-12 menu-opcoes-container d-flex row justify-content-center">
+
+        <!-- Filmes -->
+        <div class="d-flex align-items-center mr-4">
+            <a class="dropdown text-align-center clickable dropdown-toggle no-text-decor hoverable-text" href="#"
+               aria-expanded="false" data-toggle="dropdown" aria-haspopup="true">
+                Filmes
+            </a>
+            <ul class="dropdown-menu bg-color-primary box-shadow-bottom">
+                <li th:each="genero : ${generoFilmes}">
+                    <a class="dropdown-item" th:href="@{/produto/{path}(path=${genero.path})}"
+                       th:text="${genero.descricao}"></a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Serviços -->
+        <div class="d-flex align-items-center">
+            <a class="dropdown text-align-center clickable dropdown-toggle no-text-decor hoverable-text" href="#"
+               aria-expanded="false" data-toggle="dropdown" aria-haspopup="true">
+                Serviços
+            </a>
+            <ul class="dropdown-menu bg-color-primary box-shadow-bottom">
+                <li><a class="dropdown-item">Streaming vídeo <span class="badge bg-warning">TBA</span></a>
+                </li>
+                <li><a class="dropdown-item">Streaming aúdio <span class="badge bg-warning">TBA</span></a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Login/Carrinho -->
+    <div class="col-xl-4 col-sm-12 row p-2 justify-content-end">
+
+        <!-- Login (anônimo) -->
+        <div class="d-flex m-1 align-items-center" sec:authorize="isAnonymous()">
+            <a th:href="@{/cliente/cadastro}" class="hoverable-text mr-2 no-text-decor">Cadastrar</a>
+            <div class="divider-light mr-2"></div>
+            <a th:href="@{/login}" class="hoverable-text no-text-decor">Entrar</a>
+        </div>
+
+        <!-- Login (autenticado) -->
+        <div class="d-flex m-1 align-items-center dropdown-dark" sec:authorize="isAuthenticated()">
+            <a class="dropdown text-align-center clickable dropdown-toggle no-text-decor hoverable-text" href="#"
+               aria-expanded="false" data-toggle="dropdown" aria-haspopup="true" sec:authentication="name">
+            </a>
+            <ul class="dropdown-menu bg-color-primary box-shadow-bottom">
+                <li><a class="dropdown-item" th:href="@{/cliente/meus-pedidos}">Meus pedidos</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-unlink"></i> Sair</a></li>
+            </ul>
+        </div>
+
+        <!-- Carrinho -->
+        <div class="d-flex m-1 align-items-center hoverable-container">
+            <a class="icon-container mr-1 d-flex clickable no-text-decor" th:href="@{/compra}">
+                <i class="fa fa-2x fa-shopping-cart text-white"></i>
+            </a>
+            <div class="m-1 carrinho-contador-compras clickable">
+                <a class="no-text-decor hoverable-text" th:href="@{/compra}" id="carrinhoContador"></a>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+</html>

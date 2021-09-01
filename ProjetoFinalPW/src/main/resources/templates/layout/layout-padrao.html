@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>A Real .COMpany</title>
+    <link rel="icon" th:href="@{/icons/favicon.ico}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/fontawesome/4.7.0/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/sweetalert2/10.15.5/dist/sweetalert2.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script type="text/javascript" th:src="@{/js/cookie-handler.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/sweetalert2/10.15.5/dist/sweetalert2.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<!-- Header -->
+<div th:replace="layout/fragments/header"></div>
+
+<!-- Conteúdo geral -->
+<div class="d-flex flex-column">
+
+    <!-- Conteúdo customizável -->
+    <section class="flex-grow-1 main-content-container grid container-fluid row p-5" layout:fragment="conteudo">
+    </section>
+
+</div>
+
+<!-- Rodapé -->
+<div th:replace="layout/fragments/footer"></div>
+
+</body>
+
+</html>

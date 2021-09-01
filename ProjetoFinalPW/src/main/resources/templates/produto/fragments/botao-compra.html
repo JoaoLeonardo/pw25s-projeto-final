@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{/js/carrinho-compra.js}"></script>
+</head>
+<div th:onclick="adicionarNoCarrinho([[${produto.id}]], this);">
+    <button class="btn btn-success box-shadow mr-2 mb-2" type="button">
+        <i class="bi bi-cart" aria-hidden="true"></i>Adicionar ao carrinho
+    </button>
+    <button class="btn box-shadow bg-color-primary text-color-primary mb-2" type="button"
+            th:text="'R$' + ${produto.valor}"></button>
+</div>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<body>
+<head>
+    <script type="text/javascript" th:src="@{/js/compra-confirmacao.js}"></script>
+</head>
+<section layout:fragment="conteudo">
+    <div class="d-flex flex-column width-full">
+
+        <h2>Carrinho</h2>
+
+        <!-- Compra -->
+        <form class="width-full row no-m-sides" th:action="@{compra/final}">
+            <!-- Produtos -->
+            <div th:fragment="compra-produtos"
+                 th:replace="carrinho/fragments/compra-produtos :: compraProdutos(habilitado='true')"></div>
+
+            <!-- Ações da compra -->
+            <div class="container card-compra-confirmacao-acoes card row col-lg-4 col-sm-12 p-3 no-m-sides">
+
+                <!-- Frete -->
+                <div class="col border-bottom border-dark d-flex flex-column justify-content-center">
+                    <div class="form-check" th:each="frete,iter: ${fretes}">
+                        <input class="form-check-input" type="radio" th:name="freteId" th:checked="${iter.first}"
+                               th:id="${'frete' + frete.id}"
+                               th:value="${frete.id}">
+                        <label class="form-check-label d-flex justify-content-between" th:for="${'frete' + frete.id}">
+                            <i class="mr-1" th:text="${frete.texto}"></i>
+                            <i class="mr-1" th:text="${frete.prazo}"></i>
+                            <i class="mr-1"
+                               th:text="'R$' + (${frete.valorEntrega} ? ${frete.valorEntrega} : '0,00')"></i>
+                        </label>
+                    </div>
+                    <div class="mt-2 text-align-center"><i>Entregue por:</i> Trabalho Final - João Leonardo</div>
+                </div>
+
+                <!-- Valor total -->
+                <div class="col d-flex justify-content-between align-items-center border-bottom border-dark p-3">
+                    <h5 class="no-m">Valor total</h5>
+                    <div class="d-flex flex-column text-align-end">
+                        <b id="compraConfirmacaoValor"></b>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+                <div class="col d-flex flex-column p-3 justify-content-center bg-color-distinct-group mb-3">
+                    <button class="btn btn-dark box-shadow mb-2" type="submit">
+                        Continuar
+                    </button>
+                    <a class="mb-2 text-align-center" th:href="@{/home}">Escolher mais produtos</a>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="compraProdutos">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.js"></script>
+    <script type="text/javascript" th:src="@{/js/carrinho-compra.js}"></script>
+    <script type="text/javascript" th:src="@{/js/compra-produto.js}"></script>
+</head>
+<div id="compraProdutos" class="container card row col-lg-8 col-sm-12 p-3 no-m-sides"
+     th:fragment="compraProdutos">
+
+    <!-- Produto -->
+    <div class="col no-m-sides no-pad-sides row border grid bg-white align-items-center"
+         th:each="item : ${produtosCompra}">
+
+        <!-- Imagem -->
+        <div class="p-3 d-flex col-lg-5 col-sm-12 justify-content-center align-items-center">
+            <img class="produto-img align-self-center" th:src="@{${'/images/' + item.produto.imagem}}">
+        </div>
+
+        <!-- Detalhes -->
+        <div class="col-lg-7 col-sm-12 p-3">
+            <!-- Texto -->
+            <div class="justify-text flex-column">
+                <div><b>Título:</b> <span th:text="${item.produto.titulo}"></span></div>
+                <div class="row no-m">
+                    <b class="word-margin">Diretor:</b>
+                    <div class="word-margin" th:each="diretor,iter: ${item.produto.diretores}">
+                        <div th:text="${diretor.nome} + (${iter.last} ? '' : ', ')"></div>
+                    </div>
+                </div>
+                <div><b>Ano:</b> <span th:text="${item.produto.ano}"></span></div>
+                <div><b>Sinopse:</b> <span th:text="${item.produto.sinopse}"></span></div>
+                <h4 class="text-align-center m-2">R$<span th:text="${item.produto.valor}"></span></h4>
+            </div>
+            <!-- Ações -->
+            <div class="row p-3 align-items-center justify-content-center" th:if="${habilitado}">
+                <button id="btnRemover" th:onclick="removerProdutoCompra([[${item.produto.id}]]);"
+                        class="btn btn-secondary box-shadow mb-2" type="button">
+                    Remover
+                </button>
+                <div class="input-group width-unset ml-2 mb-2" title="Quantidade">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Qtde.</div>
+                    </div>
+                    <input type="text" class="form-control" th:id="${'quantidadeItem' + item.produto.id}"
+                           th:value="${item.quantidade}"
+                           th:onchange="produtoCompraChangeQuantidade([[${item.produto.id}]])">
+                    <button class="btn btn-dark btn-no-b-radius" type="button"
+                            th:onclick="produtoCompraAddQuantidade([[${item.produto.id}]])">+
+                    </button>
+                    <button class="btn btn-dark btn-no-b-radius" type="button"
+                            th:onclick="produtoCompraSubtQuantidade([[${item.produto.id}]])">-
+                    </button>
+                </div>
+            </div>
+            <!-- Quantidade estática -->
+            <h5 class="text-align-end m-2"
+                 th:unless="${habilitado}"
+                 th:text="${'Qtde. ' + item.quantidade}">
+            </h5>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</html>

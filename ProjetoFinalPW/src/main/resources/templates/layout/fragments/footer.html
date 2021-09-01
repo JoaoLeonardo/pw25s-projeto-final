@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<footer class="rodape container-fluid row no-m-sides justify-content-center align-self-end">
+
+    <!-- Coluna informações institucionais -->
+    <div class="col-lg-3 col-sm-6 p-2">
+        <ul>
+            <span><b>Sobre nós</b></span>
+            <li><a class="no-text-decor" href="#pgtrabalho">Trabalhe conosco</a></li>
+            <li><a class="no-text-decor" href="#pgduvidas">Dúvidas comuns</a></li>
+            <li><a class="no-text-decor" href="#pgcomunidade">Comunidade</a></li>
+            <li><a class="no-text-decor" href="#suporte">Suporte</a></li>
+        </ul>
+    </div>
+
+    <!-- Informações gerais -->
+    <div class="col-lg-3 col-sm-6 p-2">
+        <ul>
+            <span><b>Informações gerais</b></span>
+            <li>CNPJ: XXXXX-XX</li>
+            <li>Inscrição estadual: XXXXX</li>
+            <li>E-mail: email@email.com</li>
+        </ul>
+    </div>
+
+    <!-- Informações gerais -->
+    <div class="col-lg-3 col-sm-6 p-2">
+        <ul>
+            <span><b>Fique por dentro</b></span>
+            <li><a class="no-text-decor" href="#newsletter">Newsletter</a></li>
+            <li><a class="no-text-decor" href="#feed">Feed</a></li>
+        </ul>
+    </div>
+
+    <!-- Pagamento -->
+    <div class="col-lg-3 col-sm-6 p-2">
+        <ul>
+            <span><b>Opções de pagamento</b></span>
+            <li>
+                Cartão de crédito <i class="fa fa-credit-card fill-gold"></i>
+            </li>
+            <li>
+                Boleto <i class="fa fa-barcode fill-gold"></i>
+            </li>
+            <li>
+                Transferência <i class="fa fa-exchange fill-gold"></i>
+            </li>
+            <li>
+                Pix <i class="fa fa-mobile fill-gold"></i>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Logo -->
+    <div class="d-flex m-2 bg-light rounded">
+        <div th:replace="/layout/fragments/logo"></div>
+    </div>
+
+</footer>
+
+</html>

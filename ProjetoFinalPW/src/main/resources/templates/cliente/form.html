@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout-padrao}">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.12/jquery.mask.js"></script>
+    <script type="text/javascript" th:src="@{/js/cliente-form.js}"></script>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <form class="width-full" th:action="@{/cliente}" th:id="formCliente" method="post" th:object="${cliente}">
+
+        <h2>Cadastro de cliente</h2>
+
+        <!-- Dados pessoais -->
+        <div class="container card row col-12 p-3 mb-3 no-m-sides">
+
+            <!-- Título -->
+            <h4 class="font-weight-bold mb-3">Dados pessoais</h4>
+            <div class="mb-3">
+                <div class="hor-divider-dark"></div>
+            </div>
+
+            <!-- Nome completo -->
+            <div class="col-12 form-group required">
+                <label class="control-label" th:for="nome" th:text="'Nome completo'"></label>
+                <input class="form-control" th:field="*{nome}" placeholder="Insira seu nome..." type="text"
+                       required="required">
+                <span th:errors="*{nome}" class="text-danger"></span>
+            </div>
+
+            <div class="row no-m-sides">
+
+                <!-- CPF -->
+                <div class="col-lg-3 col-sm-6 form-group required">
+                    <label class="control-label" th:for="cpf" th:text="'CPF'"></label>
+                    <input class="form-control" th:field="*{cpf}" placeholder="000.000.000-00" type="text"
+                           required="required">
+                    <span th:errors="*{cpf}" class="text-danger"></span>
+                </div>
+
+                <!-- Data de nascimento -->
+                <div class="col-lg-3 col-sm-6 form-group required">
+                    <label class="control-label" th:for="dataNascimento" th:text="'Data de nascimento'"></label>
+                    <input class="form-control" th:field="*{dataNascimento}" type="date" required="required">
+                    <span th:errors="*{dataNascimento}" class="text-danger"></span>
+                </div>
+
+                <!-- Telefone -->
+                <div class="col-lg-3 col-sm-6 form-group required">
+                    <label class="control-label" th:for="telefone" th:text="'Telefone'"></label>
+                    <input class="form-control" th:field="*{telefone}" placeholder="(00) 0000-0000" type="text"
+                           required="required">
+                    <span th:errors="*{telefone}" class="text-danger"></span>
+                </div>
+
+                <!-- Celular -->
+                <div class="col-lg-3 col-sm-6 form-group">
+                    <label class="control-label" th:for="celular" th:text="'Celular'"></label>
+                    <input class="form-control" th:field="*{celular}" placeholder="(00) 00000-0000" type="text">
+                    <span th:errors="*{celular}" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <!-- Username -->
+            <div class="col-12 form-group required">
+                <label class="control-label" th:for="nomeUsuario" th:text="'Nome de usuário'"></label>
+                <input class="form-control" th:field="*{nomeUsuario}" placeholder="Insira um nome de usuário..."
+                       type="text" required="required">
+                <span th:errors="*{nomeUsuario}" class="text-danger"></span>
+            </div>
+
+            <!-- E-mail -->
+            <div class="col-12 form-group required">
+                <label class="control-label" th:for="email" th:text="'E-mail'"></label>
+                <input class="form-control" th:field="*{email}" placeholder="exemplo@email.com" type="email"
+                       required="required">
+                <span th:errors="*{email}" class="text-danger"></span>
+            </div>
+
+            <!-- Senha -->
+            <div class="col-12 form-group required">
+                <label class="control-label" th:for="senha" th:text="'Senha'"></label>
+                <input class="form-control" th:field="*{senha}" type="password" required="required">
+                <span th:errors="*{senha}" class="text-danger"></span>
+            </div>
+
+            <!-- Confirmar senha -->
+            <div class="col-12 form-group required">
+                <label class="control-label" th:for="confirmacaoSenha">Confirme a senha</label>
+                <input type="password" class="form-control" th:field="*{confirmacaoSenha}" required="required">
+                <span th:errors="*{confirmacaoSenha}" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <!-- Endereço -->
+        <div class="container card row col-12 p-3 no-m-sides">
+
+            <!-- Título -->
+            <h4 class="font-weight-bold mb-3">Endereço</h4>
+            <div class="mb-3">
+                <div class="hor-divider-dark"></div>
+            </div>
+
+            <div class="row no-m-sides">
+
+                <!-- Cidade -->
+                <div class="col-lg-9 col-sm-12 form-group required">
+                    <label class="control-label" th:for="cidade" th:text="'Cidade'"></label>
+                    <input class="form-control" th:field="*{endereco.cidade}" placeholder="Insira o nome da cidade..."
+                           type="text" required="required">
+                    <span th:errors="*{endereco.cidade}" class="text-danger"></span>
+                </div>
+
+                <!-- Estado -->
+                <div class="col-lg-3 col-sm-12 form-group required">
+                    <label class="control-label" th:for="estado" th:text="'Estado'"></label>
+                    <select class="form-control" th:field="*{endereco.estado}" data-placeholder="Selecione o estado..."
+                            type="text" required="required">
+                        <option th:each="opt : ${estados}" th:text="${opt.nome}" th:value="${opt}"></option>
+                    </select>
+                    <span th:errors="*{endereco.estado}" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row no-m-sides">
+
+                <!-- Rua -->
+                <div class="col-lg-8 col-sm-12 form-group required">
+                    <label class="control-label" th:for="rua" th:text="'Rua'"></label>
+                    <input class="form-control" th:field="*{endereco.rua}" placeholder="Insira o nome da rua..."
+                           type="text" required="required">
+                    <span th:errors="*{endereco.rua}" class="text-danger"></span>
+                </div>
+
+                <!-- Complemento -->
+                <div class="col-lg-4 col-sm-12 form-group">
+                    <label class="control-label" th:for="complemento" th:text="'Complemento'"></label>
+                    <input class="form-control" th:field="*{endereco.complemento}" placeholder="Insira o complemento..."
+                           type="text">
+                    <span th:errors="*{endereco.complemento}" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row no-m-sides">
+
+                <!-- Número -->
+                <div class="col-lg-4 col-sm-12 form-group required">
+                    <label class="control-label" th:for="endereco.numero" th:text="'Número'"></label>
+                    <input class="form-control" th:field="*{endereco.numero}" th:id="numero" placeholder="000"
+                           type="text" required="required">
+                    <span th:errors="*{endereco.numero}" class="text-danger"></span>
+                </div>
+
+                <!-- Bairro -->
+                <div class="col-lg-4 col-sm-12 form-group required">
+                    <label class="control-label" th:for="bairro" th:text="'Bairro'"></label>
+                    <input class="form-control" th:field="*{endereco.bairro}" placeholder="Insira o nome do bairro..."
+                           type="text" required="required">
+                    <span th:errors="*{endereco.bairro}" class="text-danger"></span>
+
+                </div>
+
+                <!-- CEP -->
+                <div class="col-lg-4 col-sm-12 form-group required">
+                    <label class="control-label" th:for="cep" th:text="'CEP'"></label>
+                    <input class="form-control" th:field="*{endereco.cep}" th:id="cep" placeholder="00000-000"
+                           type="text" required="required">
+                    <span th:errors="*{endereco.cep}" class="text-danger"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Botão incluir -->
+        <div th:replace="layout/fragments/btn-gravar"></div>
+
+    </form>
+</section>
+</body>
+</html>
