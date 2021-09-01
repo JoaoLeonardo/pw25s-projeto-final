@@ -157,7 +157,6 @@ public class CompraController extends BasicController {
             listProdutoQnt.add(new ProdutoQuantidade(produtoService.findOne(id), Integer.parseInt(itemParte[1])));
         }
 
-        // TODO: Retornar CompraProdutoDto com produto + quantidade
         return listProdutoQnt;
     }
 
