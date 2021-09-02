@@ -22,7 +22,7 @@ public class CompanyMailer {
         JavaMailSenderImpl sender = getMailSender();
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
-        mailMessage.setFrom("arealdotcompany@gmail.com");
+        mailMessage.setFrom(sender.getUsername());
         mailMessage.setTo(mensagem.destinatario);
         mailMessage.setSubject(mensagem.titulo);
         mailMessage.setText(mensagem.corpo);
